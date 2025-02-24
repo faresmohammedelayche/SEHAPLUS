@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "993207279980",
+    "project_id": "sehaplus-62717",
+    "storage_bucket": "sehaplus-62717.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993207279980:android:a8ad16fac0cb2613371349",
+        "android_client_info": {
+          "package_name": "com.example.sehaplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASUhCPN7bdAYPL5hws4uwhFDHNpN0Ror0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

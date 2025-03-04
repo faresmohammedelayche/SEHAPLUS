@@ -1,0 +1,163 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VerifierOTP">
+
+    <!-- حقول إدخال الكود -->
+
+    <!-- زر التحقق -->
+
+    <TextView
+        android:id="@+id/font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="91dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Phone number validation"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/font"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="187dp"
+        android:text="Enter the code we’ve sent to"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-21dp"
+        android:layout_marginEnd="67dp"
+        android:text="+2137730926"
+        android:textColor="#DB6767"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/otp_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="26dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/code_input2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:hint="2"
+            android:inputType="numberPassword"
+            android:maxLength="1"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/code_input3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:hint="3"
+            android:inputType="numberPassword"
+            android:maxLength="1"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/code_input4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:hint="4"
+            android:inputType="numberPassword"
+            android:maxLength="1"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/code_input5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:hint="5"
+            android:inputType="numberPassword"
+            android:maxLength="1"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/code_input6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:hint="6"
+            android:inputType="numberPassword"
+            android:maxLength="1"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/code_input1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:hint="1"
+            android:inputType="numberPassword"
+            android:maxLength="1"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/otp_container"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="77dp"
+        android:text="Didn’t receive the code?"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/button_resend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView4"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-35dp"
+        android:layout_marginEnd="73dp"
+        android:background="@android::color/transparent"
+        android:text="Resend"
+        android:textColor="#7CEEF2"
+        android:textColorLink="#00FFFFFF"
+        android:textSize="16sp" />
+
+</RelativeLayout>

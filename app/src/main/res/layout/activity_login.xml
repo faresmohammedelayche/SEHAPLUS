@@ -17,25 +17,10 @@
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:src="@drawable/pic"
+            android:src="@drawable/loginphoto"
 
             tools:layout_editor_absoluteX="-20dp"
             tools:layout_editor_absoluteY="-129dp" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="716dp"
-            android:layout_above="@+id/book_your"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="-198dp"
-            android:layout_marginBottom="-1dp"
-            android:src="@drawable/loginphoto"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="128dp" />
 
         <TextView
             android:id="@+id/textView"
@@ -59,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView4"
-            android:layout_marginBottom="-194dp"
+            android:layout_marginBottom="-186dp"
             android:padding="18dp"
             android:text="Book your paramedical care and access a
 

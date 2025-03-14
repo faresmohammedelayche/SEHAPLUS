@@ -4,90 +4,126 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 
 public class UserInfo extends AppCompatActivity {
 
-    // تعريف حقول إدخال الاسم الأول واسم العائلة
     private EditText firstName, lastName;
+    private CheckBox agreeCheckBox;
+    private Button saveInfoBtn;
 
-    // كائن المصادقة عبر Firebase
     private FirebaseAuth mAuth;
-
-    // مرجع قاعدة البيانات في Firebase
-    private DatabaseReference databaseRef;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 
-        // ربط الحقول بعناصر واجهة المستخدم في ملف XML
+        // ربط الحقول بعناصر الواجهة
         firstName = findViewById(R.id.first_name_input);
         lastName = findViewById(R.id.last_name_input);
-        Button saveInfoBtn = findViewById(R.id.next_btn);
+        agreeCheckBox = findViewById(R.id.myCheckBox);
+        saveInfoBtn = findViewById(R.id.next_btn);
 
-        // تهيئة Firebase Auth
+        // تهيئة Firebase Auth و Firestore
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
-        // تحديد مرجع قاعدة البيانات "Users" في Firebase
-        databaseRef = FirebaseDatabase.getInstance().getReference("Users");
+        // تعطيل زر "التالي" في البداية
+        saveInfoBtn.setEnabled(false);
 
-        // تعيين حدث عند الضغط على زر الحفظ
+        // التحقق من إدخال المعلومات والموافقة على الشروط
+        agreeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> validateInput());
+
+        firstName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                validateInput();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        lastName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                validateInput();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        // تعيين حدث عند الضغط على زر "التالي"
         saveInfoBtn.setOnClickListener(v -> saveUserInfo());
     }
 
     /**
-     * حفظ معلومات المستخدم في قاعدة بيانات Firebase
+     * التحقق من صحة الإدخال وتفعيل زر "التالي" إذا كانت جميع الشروط مستوفاة
+     */
+    private void validateInput() {
+        String firstname = firstName.getText().toString().trim();
+        String lastname = lastName.getText().toString().trim();
+        boolean isChecked = agreeCheckBox.isChecked();
+
+        boolean isValid = !TextUtils.isEmpty(firstname) && !TextUtils.isEmpty(lastname) && isChecked;
+
+        saveInfoBtn.setEnabled(isValid);
+    }
+
+    /**
+     * حفظ معلومات المستخدم في Firestore بنفس الوثيقة (document) التي تحتوي على رقم الهاتف
      */
     private void saveUserInfo() {
         String firstname = firstName.getText().toString().trim();
         String lastname = lastName.getText().toString().trim();
 
-        // الحصول على معرف المستخدم الحالي من Firebase Auth
-        String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-
-        // التحقق من أن حقل الاسم الأول غير فارغ
-        if (TextUtils.isEmpty(firstname)) {
-            Toast.makeText(this, "Please enter your first name", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(firstname) || TextUtils.isEmpty(lastname)) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // إنشاء كائن المستخدم لتخزين البيانات
-        User user = new User(firstname, lastname);
+        // الحصول على معرف المستخدم الحالي
+        String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        // حفظ بيانات المستخدم في قاعدة البيانات تحت معرف المستخدم
-        databaseRef.child(userId).setValue(user)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // نجاح العملية، عرض رسالة وإعادة التوجيه إلى الصفحة الرئيسية
-                        Toast.makeText(UserInfo.this, "Information saved successfully!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(UserInfo.this, MainActivity.class));
-                        finish();
-                    } else {
-                        // فشل العملية، عرض رسالة خطأ
-                        Toast.makeText(UserInfo.this, "Failed to save information", Toast.LENGTH_SHORT).show();
-                    }
+        // إنشاء مرجع إلى مستند المستخدم في Firestore
+        DocumentReference userRef = firestore.collection("Users").document(userId);
+
+        // إنشاء بيانات جديدة لتحديث الوثيقة
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("first_name", firstname);
+        userData.put("last_name", lastname);
+
+        // تحديث البيانات في نفس الوثيقة
+        userRef.update(userData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(UserInfo.this, "Information saved successfully!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(UserInfo.this, MainActivity.class));
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("UserInfo", "Failed to save information", e);
+                    Toast.makeText(UserInfo.this, "Failed to save information", Toast.LENGTH_SHORT).show();
                 });
-    }
-
-    /**
-     * كلاس يمثل كائن المستخدم لتخزين بياناته في قاعدة البيانات
-     */
-    static class User {
-        public String firstname, lastname;
-
-        // **تصحيح خطأ في ترتيب المعاملات في المُنشئ**
-        public User(String firstname, String lastname) {
-            this.firstname = firstname;
-            this.lastname = lastname;
-        }
     }
 }

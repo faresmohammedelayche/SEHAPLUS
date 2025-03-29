@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity {
                         // الانتقال إلى شاشة إدخال رمز التحقق OTP
                         Intent intent = new Intent(Login.this, VerifierOTP.class);
                         intent.putExtra("verificationId", verificationId);
-                        intent.putExtra("phoneNumber", number);
+                        intent.putExtra("PHONE_NUMBER", number); // تعديل هنا
                         startActivity(intent);
                     }
                 })
@@ -96,3 +96,5 @@ public class Login extends AppCompatActivity {
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 }
+
+

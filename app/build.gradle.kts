@@ -13,7 +13,6 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,6 +32,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -47,10 +47,16 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-firestore:25.1.2")
-
+    implementation ("com.squareup.picasso:picasso:2.8")
+    implementation ("com.google.firebase:firebase-storage:20.2.0")
+    implementation ("com.android.volley:volley:1.2.1")
+    implementation ("com.google.android.material:material:1.6.0")
+    implementation ("org.maplibre.gl:android-sdk:9.6.0")
+    implementation ("org.osmdroid:osmdroid-android:6.1.16")
 }

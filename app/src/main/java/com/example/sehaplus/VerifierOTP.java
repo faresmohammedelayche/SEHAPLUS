@@ -49,7 +49,13 @@ public class VerifierOTP extends AppCompatActivity {
 
         // الحصول على معرف التحقق ورقم الهاتف
         verificationId = getIntent().getStringExtra("verificationId");
-        phoneNumber = getIntent().getStringExtra("phoneNumber");
+        phoneNumber = getIntent().getStringExtra("PHONE_NUMBER"); // استقبال الرقم الصحيح
+
+        TextView phoneNumberText = findViewById(R.id.textView3);
+        if (phoneNumber != null) {
+            phoneNumberText.setText(phoneNumber);
+        }
+
 
         // إعداد التنقل بين الحقول
         setupOTPInputs();
@@ -153,3 +159,6 @@ public class VerifierOTP extends AppCompatActivity {
         // تنفيذ إعادة إرسال OTP هنا
     }
 }
+
+
+

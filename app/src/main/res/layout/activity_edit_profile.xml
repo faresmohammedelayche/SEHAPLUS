@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@color/white">
+
+    <!-- Profile Image -->
+
+    <!-- Change Profile Picture Button -->
+
+    <!-- First Name -->
+
+    <!-- Last Name -->
+
+    <!-- Gender -->
+
+    <ImageView
+        android:id="@+id/button_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="Back to home page"
+        android:scaleType="centerCrop"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileImage"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/circle_shape"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/Widget.MaterialComponents.ShapeableImageView.Circle" />
+
+    <Button
+        android:id="@+id/btnChangePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="#01D7D7"
+        android:text="Change Picture"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/profileImage"
+        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editFirstName"
+        android:layout_width="290dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/input_background"
+        android:hint="First Name"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+    <EditText
+        android:id="@+id/editLastName"
+        android:layout_width="291dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/input_background"
+        android:hint="Last Name"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editFirstName" />
+
+    <RadioGroup
+        android:id="@+id/radioGenderGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/editLastName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp">
+
+    </RadioGroup>
+
+    <!-- Location -->
+
+
+    <!-- Save Button -->
+
+    <EditText
+        android:id="@+id/locationField"
+        android:layout_width="274dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/input_background"
+        android:hint="Location"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#01D7D7"
+        android:padding="12dp"
+        android:text="Save Changes"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/locationField"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="362dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="map"
+        android:onClick="openMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioMale" />
+
+    <RadioButton
+        android:id="@+id/radioFemale"
+        android:layout_width="104dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:text="Female"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editLastName"
+        tools:ignore="MissingConstraints" />
+
+    <RadioButton
+        android:id="@+id/radioMale"
+        android:layout_width="104dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="32dp"
+        android:text="Male"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/radioFemale"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editLastName"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

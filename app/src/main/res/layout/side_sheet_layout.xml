@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
+    android:layout_gravity="start">
+
+    <!-- الخلفية الداكنة لإعطاء تأثير النافذة المنبثقة -->
+    <!-- الحاوية الجانبية -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sideMenuContainer"
+        android:layout_width="407dp"
+        android:layout_height="727dp"
+        android:background="@drawable/bg_bottom_sheet"
+        android:elevation="8dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <!-- صورة الحساب + اسم المستخدم + زر التعديل -->
+
+        <!-- القائمة مع الأيقونات -->
+
+        <!-- زر تغيير الـ Mode -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profileSection"
+            android:layout_width="260dp"
+            android:layout_height="64dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profileImage"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circle_shape"
+                android:src="@drawable/user"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/Widget.MaterialComponents.ShapeableImageView.Circle"/>
+
+            <!-- اسم المستخدم -->
+
+            <!-- أيقونة التعديل -->
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="126dp"
+                android:layout_height="23dp"
+                android:layout_marginStart="4dp"
+                android:paddingStart="0dp"
+                android:text="User Name"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/profileImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.195" />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="126dp"
+                android:layout_height="23dp"
+                android:layout_marginStart="4dp"
+                android:paddingStart="8dp"
+                android:text="0000000000000"
+                android:textColor="#928D8D"
+                android:textColorLink="#646060"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/profileImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.804" />
+
+            <ImageView
+                android:id="@+id/editIcon"
+                android:layout_width="42dp"
+                android:layout_height="43dp"
+                android:padding="4dp"
+                android:src="@drawable/edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/userName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.533" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/menuItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileSection">
+
+            <LinearLayout
+                android:id="@+id/request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/request_icon" />
+
+                <TextView
+                    style="@style/BottomSheetItem"
+                    android:paddingStart="12dp"
+                    android:text="My Requests" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/favourite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/fav_icon" />
+
+                <TextView
+                    style="@style/BottomSheetItem"
+                    android:paddingStart="12dp"
+                    android:text="Favourite" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/settings_icon" />
+
+                <TextView
+                    style="@style/BottomSheetItem"
+                    android:paddingStart="12dp"
+                    android:text="Settings" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/safety"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/security_icon" />
+
+                <TextView
+                    style="@style/BottomSheetItem"
+                    android:paddingStart="12dp"
+                    android:text="Security" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/help_icon" />
+
+                <TextView
+                    style="@style/BottomSheetItem"
+                    android:paddingStart="12dp"
+                    android:text="Help" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/contact_icon" />
+
+                <TextView
+                    style="@style/BottomSheetItem"
+                    android:paddingStart="12dp"
+                    android:text="Contact" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/logout_icon" />
+
+                <TextView
+                    style="@style/BottomSheetItem"
+                    android:paddingStart="12dp"
+                    android:text="Log Out" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSwitchMode"
+            android:layout_width="216dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="#50D7C3"
+            android:text="Switch to Employee Mode"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

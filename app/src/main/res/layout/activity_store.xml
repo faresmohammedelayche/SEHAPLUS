@@ -1,10 +1,367 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".storeActivity">
+    tools:context=".nursingActivity">
+
+    <!-- زر الرجوع -->
+
+    <!-- عنوان الصفحة -->
+
+    <ImageView
+        android:id="@+id/button_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="Back to home page"
+        android:scaleType="centerCrop"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/consultation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Shop By Category"
+        android:textColor="#0D0C0C"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_back" />
+
+    <!-- مربع البحث -->
+    <EditText
+        android:id="@+id/search_nursing"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/search_background"
+        android:hint="Search a product or ..."
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/consultation" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="#EDE7F1"
+        android:text="PETCARE"
+        android:textColor="#A74AC7"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_nursing"
+        app:layout_constraintVertical_bias="0.418" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:backgroundTint="#D1E8BF"
+        android:text="VITAMINS"
+        android:textColor="#6B7460"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_nursing"
+        app:layout_constraintVertical_bias="0.418" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:backgroundTint="#AEE0DE"
+        android:text="ORTHOPAEDICS"
+        android:textColor="#3CA09B"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/search_nursing"
+        app:layout_constraintVertical_bias="0.418" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="140dp"
+        android:backgroundTint="#C6D6FB"
+        android:text="Measurements"
+        android:textColor="#5B5FD3"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_nursing" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="140dp"
+        android:backgroundTint="#F6F4D3"
+        android:text="DILUTIONS"
+        android:textColor="#B5AF58"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_nursing" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="140dp"
+        android:text="CHILD CARE"
+        android:backgroundTint="#F9DDB1"
+        android:textColor="#D24E01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toEndOf="@+id/button5"
+        app:layout_constraintTop_toBottomOf="@+id/search_nursing" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#FBC9BE"
+        android:text="Face wash Cleansers"
+        android:textColor="#C06378"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/button8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#EDE7F1"
+        android:text="DRESSING"
+        android:textColor="#5D7599"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#F0D0C1"
+        android:text="BLOOD GLUCOSE"
+        android:textColor="#D7897E"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toEndOf="@+id/button8"
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#EDE7F1"
+        android:text="AYURVEDIC"
+        android:textColor="#98148F"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toStartOf="@+id/button11"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#9082EE"
+        android:text="PAIN RELIEF
+APPLICATION"
+        android:textColor="#245667"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button8" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#FFE5EC"
+        android:text="FEMININE
+HYGIENE   "
+        android:textColor="#FB6F92"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toEndOf="@+id/button11"
+        app:layout_constraintTop_toBottomOf="@+id/button9" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView"
+        android:layout_width="87dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/button"
+        app:srcCompat="@drawable/img" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView2"
+        android:layout_width="73dp"
+        android:layout_height="108dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/img_1" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView3"
+        android:layout_width="65dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/button3"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="@+id/button3"
+        app:srcCompat="@drawable/img_2" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView4"
+        android:layout_width="90dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="29dp"
+        app:layout_constraintEnd_toEndOf="@+id/button4"
+        app:layout_constraintStart_toStartOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/imageFilterView"
+        app:srcCompat="@drawable/img_3" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView5"
+        android:layout_width="49dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/button5"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/button5"
+        app:layout_constraintTop_toTopOf="@+id/button5"
+        app:srcCompat="@drawable/img_4" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView6"
+        android:layout_width="69dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="@+id/button6"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/button6"
+        app:layout_constraintTop_toTopOf="@+id/button6"
+        app:srcCompat="@drawable/img_5" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView7"
+        android:layout_width="67dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/button7"
+        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintStart_toStartOf="@+id/button7"
+        app:layout_constraintTop_toTopOf="@+id/button7"
+        app:srcCompat="@drawable/img_6" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView9"
+        android:layout_width="64dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/button8"
+        app:layout_constraintStart_toStartOf="@+id/button8"
+        app:layout_constraintTop_toTopOf="@+id/button8"
+        app:srcCompat="@drawable/img_7" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView10"
+        android:layout_width="75dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/button9"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="@+id/button9"
+        app:layout_constraintTop_toTopOf="@+id/button9"
+        app:srcCompat="@drawable/img_8" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView11"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/button10"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="@+id/button10"
+        app:layout_constraintTop_toBottomOf="@+id/imageFilterView7"
+        app:srcCompat="@drawable/img_9" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView12"
+        android:layout_width="83dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/button11"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/button11"
+        app:layout_constraintTop_toTopOf="@+id/button11"
+        app:srcCompat="@drawable/img_10" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView13"
+        android:layout_width="90dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/button12"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button12"
+        app:layout_constraintTop_toTopOf="@+id/button12"
+        app:srcCompat="@drawable/img_11" />
+
+    <!-- الطب النفسي -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

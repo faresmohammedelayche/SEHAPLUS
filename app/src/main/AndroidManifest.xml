@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
@@ -26,7 +19,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SEHAPLUS"
-        tools:targetApi="31">
+        tools:replace="android:fullBackupContent"
+        tools:targetApi="31" >
+        <activity
+            android:name=".ProduitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProduitActivite"
+            android:exported="false" />
+        <activity
+            android:name=".editProfileNurseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestnurseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerActivity"
+            android:exported="false"
+            android:label="@string/title_activity_manager" />
+        <activity
+            android:name=".loginEmployeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmployeHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HelloEmployeActivity"
+            android:exported="false" />
         <activity
             android:name=".NurseProfileActivity"
             android:exported="false" />
@@ -38,9 +57,6 @@
             android:exported="false" />
         <activity
             android:name=".NurseListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".chooseEmployeeActivity"
             android:exported="false" />
         <activity
             android:name=".editProfileActivity"
@@ -80,7 +96,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

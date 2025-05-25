@@ -32,20 +32,16 @@ public class UserInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 
-        // ربط الحقول بعناصر الواجهة
         firstName = findViewById(R.id.first_name_input);
         lastName = findViewById(R.id.last_name_input);
         agreeCheckBox = findViewById(R.id.myCheckBox);
         saveInfoBtn = findViewById(R.id.next_btn);
 
-        // تهيئة Firebase Auth و Firestore
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
-        // تعطيل زر "التالي" في البداية
         saveInfoBtn.setEnabled(false);
 
-        // التحقق من إدخال المعلومات والموافقة على الشروط
         agreeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> validateInput());
 
         firstName.addTextChangedListener(new TextWatcher() {
@@ -74,13 +70,9 @@ public class UserInfo extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        // تعيين حدث عند الضغط على زر "التالي"
         saveInfoBtn.setOnClickListener(v -> saveUserInfo());
     }
 
-    /**
-     * التحقق من صحة الإدخال وتفعيل زر "التالي" إذا كانت جميع الشروط مستوفاة
-     */
     private void validateInput() {
         String firstname = firstName.getText().toString().trim();
         String lastname = lastName.getText().toString().trim();
@@ -91,9 +83,6 @@ public class UserInfo extends AppCompatActivity {
         saveInfoBtn.setEnabled(isValid);
     }
 
-    /**
-     * حفظ معلومات المستخدم في Firestore بنفس الوثيقة (document) التي تحتوي على رقم الهاتف
-     */
     private void saveUserInfo() {
         String firstname = firstName.getText().toString().trim();
         String lastname = lastName.getText().toString().trim();
@@ -103,18 +92,14 @@ public class UserInfo extends AppCompatActivity {
             return;
         }
 
-        // الحصول على معرف المستخدم الحالي
         String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        // إنشاء مرجع إلى مستند المستخدم في Firestore
         DocumentReference userRef = firestore.collection("Users").document(userId);
 
-        // إنشاء بيانات جديدة لتحديث الوثيقة
         Map<String, Object> userData = new HashMap<>();
         userData.put("first_name", firstname);
         userData.put("last_name", lastname);
 
-        // تحديث البيانات في نفس الوثيقة
         userRef.update(userData)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(UserInfo.this, "Information saved successfully!", Toast.LENGTH_SHORT).show();

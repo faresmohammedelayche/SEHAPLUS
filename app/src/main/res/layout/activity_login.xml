@@ -7,56 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- صورة الخلفية العلوية -->
-
-    <!-- العنوان الرئيسي -->
-
-    <!-- النص التوضيحي -->
-
-    <!-- إدخال رقم الهاتف -->
-
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView4"
-        android:layout_width="450dp"
-        android:layout_height="300dp"
-        android:padding="0dp"
-        android:src="@drawable/loginphoto"
-        android:background="@drawable/login_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
+        android:layout_width="match_parent"
+        android:layout_height="389dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/loginimage"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shapeAppearanceOverlay="@style/BottomHalfCircle" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginBottom="8dp"
         android:padding="18dp"
-        android:text="  Your Health, Delivered to Your Doorstep  "
+        android:text="Your Health, Delivered to Your Doorstep"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/book_your"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/imageView4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/book_your"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="8dp"
         android:padding="18dp"
         android:text="Book your paramedical care and access a\nselection of quality para-pharmaceutical\nproducts, directly from your smartphone."
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/phoneNumber"
@@ -71,9 +59,8 @@
         android:text="+213 "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/book_your"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/book_your" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

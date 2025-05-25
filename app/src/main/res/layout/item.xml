@@ -14,17 +14,11 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-        <!-- Profile Image -->
-
-        <!-- Nurse Info -->
-
-        <!-- Action Buttons -->
-
         <ImageView
             android:id="@+id/nurseImage"
-            android:layout_width="93dp"
-            android:layout_height="93dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/circle_background"
             android:scaleType="centerCrop"
             android:src="@drawable/user"
@@ -33,17 +27,17 @@
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="210dp"
-            android:layout_height="93dp"
+            android:layout_width="227dp"
+            android:layout_height="91dp"
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             android:paddingStart="16dp"
             app:layout_constraintBottom_toBottomOf="@id/nurseImage"
             app:layout_constraintEnd_toStartOf="@id/actionButtons"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.961"
             app:layout_constraintStart_toEndOf="@id/nurseImage"
             app:layout_constraintTop_toTopOf="@id/nurseImage"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/nurseName"
@@ -90,7 +84,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/requestServiceBtn"
+            android:id="@+id/viewProfileBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/border_button"
@@ -98,28 +92,28 @@
             android:text="View profile"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/viewProfileBtn"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/requestServiceBtn"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nurseImage"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintVertical_bias="0.0"
             app:strokeColor="#9CDADB" />
 
         <Button
-            android:id="@+id/viewProfileBtn"
+            android:id="@+id/requestServiceBtn"
             android:layout_width="118dp"
             android:layout_height="48dp"
+            android:background="@drawable/border_button"
             android:backgroundTint="#FBFAFA"
             android:text="Consulte"
-            android:background="@drawable/border_button"
             android:textColor="#0D0D0D"
             app:iconPadding="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/actionButtons"
-            app:layout_constraintHorizontal_bias="0.61"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/nurseImage"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_bias="0.0"
             app:strokeColor="#9CDADB" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

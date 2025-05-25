@@ -11,13 +11,13 @@
     <!-- صورة الحساب -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="160dp"
-        android:layout_height="126dp"
-        android:src="@drawable/account"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="268dp"
+        android:layout_height="217dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/logoremovebg"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- إدخال الاسم الأول -->
 
@@ -26,11 +26,12 @@
     <!-- مربع الموافقة على الشروط -->
 
     <!-- زر التالي -->
+
     <EditText
         android:id="@+id/first_name_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_width="329dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="36dp"
         android:hint="First name"
         android:inputType="text"
         android:padding="18dp"
@@ -38,15 +39,15 @@
         android:textColorHint="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView" />
 
     <EditText
         android:id="@+id/last_name_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_width="329dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="48dp"
         android:hint="Last name"
         android:inputType="text"
         android:padding="18dp"
@@ -54,7 +55,7 @@
         android:textColorHint="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/first_name_input" />
 
@@ -85,5 +86,26 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/myCheckBox" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/first_name_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/first_name_input"
+        app:srcCompat="@drawable/account" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/last_name_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/last_name_input"
+        app:layout_constraintVertical_bias="0.642"
+        app:srcCompat="@drawable/account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

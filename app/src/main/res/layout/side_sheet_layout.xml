@@ -7,8 +7,6 @@
     android:background="@drawable/bg_bottom_sheet"
     android:layout_gravity="start">
 
-    <!-- الخلفية الداكنة لإعطاء تأثير النافذة المنبثقة -->
-    <!-- الحاوية الجانبية -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sideMenuContainer"
         android:layout_width="407dp"
@@ -21,15 +19,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <!-- صورة الحساب + اسم المستخدم + زر التعديل -->
-
-        <!-- القائمة مع الأيقونات -->
-
-        <!-- زر تغيير الـ Mode -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/profileSection"
-            android:layout_width="260dp"
-            android:layout_height="64dp"
+            android:layout_width="302dp"
+            android:layout_height="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,23 +32,21 @@
                 android:id="@+id/profileImage"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginStart="4dp"
                 android:background="@drawable/circle_shape"
-                android:src="@drawable/user"
                 android:scaleType="centerCrop"
+                android:src="@drawable/user"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/Widget.MaterialComponents.ShapeableImageView.Circle"/>
-
-            <!-- اسم المستخدم -->
-
-            <!-- أيقونة التعديل -->
+                app:layout_constraintVertical_bias="0.076"
+                app:shapeAppearanceOverlay="@style/Widget.MaterialComponents.ShapeableImageView.Circle" />
 
             <TextView
                 android:id="@+id/userName"
-                android:layout_width="126dp"
-                android:layout_height="23dp"
-                android:layout_marginStart="4dp"
+                android:layout_width="117dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="16dp"
                 android:paddingStart="0dp"
                 android:text="User Name"
                 android:textSize="10sp"
@@ -63,13 +54,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/profileImage"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.195" />
+                app:layout_constraintVertical_bias="0.207" />
 
             <TextView
                 android:id="@+id/phone"
-                android:layout_width="126dp"
-                android:layout_height="23dp"
-                android:layout_marginStart="4dp"
+                android:layout_width="186dp"
+                android:layout_height="31dp"
                 android:paddingStart="8dp"
                 android:text="0000000000000"
                 android:textColor="#928D8D"
@@ -77,9 +67,9 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/profileImage"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.804" />
+                app:layout_constraintVertical_bias="0.797" />
 
             <ImageView
                 android:id="@+id/editIcon"
@@ -92,7 +82,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/userName"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.533" />
+                app:layout_constraintVertical_bias="0.508" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -100,7 +90,7 @@
             android:id="@+id/menuItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             android:paddingTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"

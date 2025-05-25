@@ -16,7 +16,6 @@ public class nursingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nursing);
         findViewById(R.id.button_back).setOnClickListener(v -> goToMain());
 
-        //ربط العناصر كود xml بكود java
         ImageView btnNutritionist=findViewById(R.id.Nutritionist);
         ImageView btnPhysiotherapy=findViewById(R.id.physiotherapy);
         ImageView btnPsychiatry=findViewById(R.id.psychiatry);
@@ -53,13 +52,9 @@ public class nursingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //code to search
-
-
     private void openNurseListActivity(String selectedSpeciality){
-        // عند النقر على التخصص
         Intent intent = new Intent(nursingActivity.this, NurseListActivity.class);
-        intent.putExtra("speciality", selectedSpeciality);  // selectedSpeciality هو التخصص الذي تختاره
+        intent.putExtra("speciality", selectedSpeciality);
         startActivity(intent);
 
     }

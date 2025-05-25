@@ -1,53 +1,29 @@
 package com.example.sehaplus;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Toast;
-
+import android.view.MotionEvent;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.ActivityCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONObject;
-
-
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Calendar;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
-import android.preference.PreferenceManager;
-import androidx.core.app.ActivityCompat;
-
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -56,18 +32,21 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
-
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import okhttp3.*;
 
 public class editProfileActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private static final String IMGBB_API_KEY = "6ae56faaa68b4fbc1c460819a90bf4f6"; // ضع مفتاح API هنا
+    private static final String IMGBB_API_KEY = "6ae56faaa68b4fbc1c460819a90bf4f6";
 
-    private EditText editFirstName, editLastName , editPhoneNumber ,editemail ,editAdditionalPhone, editMedicalCondition;
-
-    private ImageView profilePic , btnChangePic;
-
-    private Spinner bloodType , gender;
+    private EditText editFirstName, editLastName, editPhoneNumber, editemail, editAdditionalPhone, editMedicalCondition;
+    private ImageView profilePic, btnChangePic;
+    private Spinner bloodType, gender;
     private Button btnSave;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
@@ -82,9 +61,6 @@ public class editProfileActivity extends AppCompatActivity {
     private EditText etCoordinates;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
 
-
-
-
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,15 +70,15 @@ public class editProfileActivity extends AppCompatActivity {
         editFirstName = findViewById(R.id.editFirstName);
         editLastName = findViewById(R.id.editLastName);
         editPhoneNumber = findViewById(R.id.editPhoneNumber);
-        editemail =findViewById(R.id.editEmail);
-        editAdditionalPhone =findViewById(R.id.editAdditionalPhoneNumber);
+        editemail = findViewById(R.id.editEmail);
+        editAdditionalPhone = findViewById(R.id.editAdditionalPhoneNumber);
         profilePic = findViewById(R.id.profileImage);
         btnChangePic = findViewById(R.id.btnChangePic);
         btnSave = findViewById(R.id.btnSave);
-        bloodType=findViewById(R.id.spinnerBloodType);
-        gender=findViewById(R.id.spinnerGender);
+        bloodType = findViewById(R.id.spinnerBloodType);
+        gender = findViewById(R.id.spinnerGender);
         btnSelectBirthDate = findViewById(R.id.editbirthday);
-        editMedicalCondition=findViewById(R.id.editMedicalConditions);
+        editMedicalCondition = findViewById(R.id.editMedicalConditions);
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -118,32 +94,19 @@ public class editProfileActivity extends AppCompatActivity {
         findViewById(R.id.button_back).setOnClickListener(v -> goToMain());
 
         Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(this));
-
-        // ربط المتغيرات بعناصر XML
         mapView = findViewById(R.id.mapView);
         etCoordinates = findViewById(R.id.et_coordinates);
 
-
-        // تهيئة الخريطة
         mapView.setTileSource(TileSourceFactory.MAPNIK);
-        mapView.setMultiTouchControls(true); // تمكين اللمس المتعدد
-        mapView.getController().setZoom(15.0); // تحديد مستوى التكبير الافتراضي// تفعيل اللمس المتعدد
-        mapView.setBuiltInZoomControls(true); // إظهار أزرار التكبير والتصغير
-        mapView.setScrollableAreaLimitDouble(null); // إلغاء أي قيود على التحريك
-
-
-// إزالة أي قيود على الحركة
-        mapView.getOverlays().remove(locationOverlay); // إزالة الطبقة التي قد تحد من الحركة
-
-// تمكين المستخدم من تحريك الخريطة دون التأثير على الإحداثيات
+        mapView.setMultiTouchControls(true);
+        mapView.setBuiltInZoomControls(true);
+        mapView.getController().setZoom(15.0);
         mapView.setOnTouchListener(null);
 
-        // إضافة طبقة تحديد الموقع
         locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mapView);
         locationOverlay.enableMyLocation();
         mapView.getOverlays().add(locationOverlay);
 
-        // إضافة علامة على الموقع
         userMarker = new Marker(mapView);
         userMarker.setDraggable(true);
         mapView.getOverlays().add(userMarker);
@@ -155,52 +118,29 @@ public class editProfileActivity extends AppCompatActivity {
             }
         }));
 
-
-        mapView.getController().setZoom(18.0); // تكبير أكثر للحصول على تفاصيل دقيقة
-        mapView.getController().setCenter(new GeoPoint(36.7528, 3.0422)); // ضع أي إحداثيات تريد
+        mapView.getController().setZoom(18.0);
+        mapView.getController().setCenter(new GeoPoint(36.7528, 3.0422));
         userMarker.setOnMarkerDragListener(new Marker.OnMarkerDragListener() {
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-                // عند بدء السحب
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-                // أثناء السحب
-            }
-
-            @Override
+            public void onMarkerDragStart(Marker marker) {}
+            public void onMarkerDrag(Marker marker) {}
             public void onMarkerDragEnd(Marker marker) {
-                // تحديث الإحداثيات بعد انتهاء السحب
                 GeoPoint newPosition = marker.getPosition();
                 etCoordinates.setText(newPosition.getLatitude() + ", " + newPosition.getLongitude());
             }
         });
 
-
-        // التأكد من الأذونات
         requestPermissionsIfNecessary(new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         });
 
-        // ضبط الموقع الافتراضي عند تشغيل التطبيق
-        locationOverlay.runOnFirstFix(() -> runOnUiThread(() -> {
-            GeoPoint myLocation = locationOverlay.getMyLocation();
-            if (myLocation != null) {
-                updateLocation(myLocation);
-            }
-        }));
-
-        // تحديث الإحداثيات عند تحريك العلامة
         mapView.setOnTouchListener((v, event) -> {
-            if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
                 IGeoPoint touchedPoint = mapView.getProjection().fromPixels((int) event.getX(), (int) event.getY());
                 updateLocation(new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude()));
             }
             return false;
         });
-
     }
 
     private void requestPermissionsIfNecessary(String[] permissions) {
@@ -216,121 +156,21 @@ public class editProfileActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
-            boolean allGranted = true;
-            for (int result : grantResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
-                    allGranted = false;
-                    break;
-                }
-            }
-        }
-    }
-
-
-
-
     private void updateLocation(GeoPoint newPoint) {
-        userMarker.setPosition(newPoint); // تحديث موقع العلامة
-        mapView.getController().animateTo(newPoint); // تحريك الكاميرا إلى الموقع الجديد
+        userMarker.setPosition(newPoint);
+        mapView.getController().animateTo(newPoint);
         etCoordinates.setText(newPoint.getLatitude() + ", " + newPoint.getLongitude());
-
-        // حفظ الإحداثيات في Firestore
         saveCoordinatesToFirestore(newPoint.getLatitude(), newPoint.getLongitude());
-    }
-
-
-
-
-    private void goToMain() {
-        Intent intent = new Intent(editProfileActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    private void loadUserData() {
-        String userId = auth.getCurrentUser().getUid();
-        DocumentReference userRef = db.collection("Users").document(userId);
-
-        userRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                editFirstName.setText(documentSnapshot.getString("first_name"));
-                editLastName.setText(documentSnapshot.getString("last_name"));
-                editPhoneNumber.setText(documentSnapshot.getString("phone"));
-                editemail.setText(documentSnapshot.getString("Email"));
-                editAdditionalPhone.setText(documentSnapshot.getString("additional_phone"));
-                editMedicalCondition.setText(documentSnapshot.getString("Medical_Condition"));
-                selectedBirthDate = documentSnapshot.getString("birthday");
-                if (selectedBirthDate != null) {
-                    btnSelectBirthDate.setText(selectedBirthDate);
-                }
-                Double latitude = documentSnapshot.getDouble("latitude");
-                Double longitude = documentSnapshot.getDouble("longitude");
-
-                if (latitude != null && longitude != null) {
-                    GeoPoint userLocation = new GeoPoint(latitude, longitude);
-                    updateLocation(userLocation);
-                }
-
-                String savedBloodType = documentSnapshot.getString("blood_type");
-                String savedGender = documentSnapshot.getString("gender");
-
-                if (savedBloodType != null) {
-                    setSpinnerSelection(bloodType, savedBloodType);
-                }
-                if (savedGender != null) {
-                    setSpinnerSelection(gender, savedGender);
-                }
-                String imageUrl = documentSnapshot.getString("profile_image");
-                if (!TextUtils.isEmpty(imageUrl)) {
-                    Picasso.get().load(imageUrl).into(profilePic);
-                }
-            }
-        }).addOnFailureListener(e -> Log.e("FirestoreError", "Error loading user data", e));
     }
 
     private void saveCoordinatesToFirestore(double latitude, double longitude) {
         String userId = auth.getCurrentUser().getUid();
         DocumentReference userRef = db.collection("Users").document(userId);
-
-        Map<String, Object> coordinates = new HashMap<>();
-        coordinates.put("latitude", latitude);
-        coordinates.put("longitude", longitude);
-
-        userRef.update(coordinates)
-                .addOnSuccessListener(aVoid -> Log.d("Firestore", "تم حفظ الإحداثيات بنجاح"))
-                .addOnFailureListener(e -> Log.e("Firestore", "فشل في الحفظ", e));
-    }
-
-
-    private void showDatePickerDialog() {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
-            selectedBirthDate = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
-            btnSelectBirthDate.setText(selectedBirthDate);
-        }, year, month, day);
-        datePickerDialog.show();
-    }
-
-    private void setSpinnerSelection(Spinner spinner, String value) {
-        for (int i = 0; i < spinner.getCount(); i++) {
-            if (spinner.getItemAtPosition(i).toString().equals(value)) {
-                spinner.setSelection(i);
-                break;
-            }
-        }
+        userRef.update("latitude", latitude, "longitude", longitude);
     }
 
     private void openFileChooser() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
@@ -343,133 +183,122 @@ public class editProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void saveUserData() {
-        String firstName = editFirstName.getText().toString().trim();
-        String lastName = editLastName.getText().toString().trim();
-        String phoneNumber= editPhoneNumber.getText().toString().trim();
-        String Email = editemail.getText().toString().trim();
-        String AdditionalPhone = editAdditionalPhone.getText().toString().trim();
-        String selectedBloodType = bloodType.getSelectedItem().toString();
-        String selectedGender = gender.getSelectedItem().toString();
-        String medicalCondition = editMedicalCondition.getText().toString().trim();
+    private void showDatePickerDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR), month = calendar.get(Calendar.MONTH), day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year1, monthOfYear, dayOfMonth) -> {
+                    selectedBirthDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
+                    btnSelectBirthDate.setText(selectedBirthDate);
+                }, year, month, day);
+        datePickerDialog.show();
+    }
 
-        if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)||TextUtils.isEmpty(phoneNumber)) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
+    private void goToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
-        progressDialog.show();
-
-        String userId = auth.getCurrentUser().getUid();
-        DocumentReference userRef = db.collection("Users").document(userId);
-        Map<String, Object> userUpdates = new HashMap<>();
-        userUpdates.put("first_name", firstName);
-        userUpdates.put("last_name", lastName);
-        userUpdates.put("phone",phoneNumber);
-        userUpdates.put("Email",Email);
-        userUpdates.put("additional_phone",AdditionalPhone);
-        userUpdates.put("blood_type", selectedBloodType);
-        userUpdates.put("gender", selectedGender);
-        userUpdates.put("birthday", selectedBirthDate);
-        userUpdates.put("Medical_Condition", medicalCondition);
-
-        if (imageUri != null) {
-            uploadImageToImgBB(userRef, userUpdates);
-        } else {
-            updateFirestore(userRef, userUpdates);
+    private void setSpinnerSelection(Spinner spinner, String value) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(value)) {
+                spinner.setSelection(i);
+                break;
+            }
         }
     }
 
-    private void uploadImageToImgBB(DocumentReference userRef, Map<String, Object> userUpdates) {
-        progressDialog.setMessage("Uploading image...");
-        String imagePath = getRealPathFromURI(imageUri);
-        if (imagePath == null) {
-            progressDialog.dismiss();
-            Toast.makeText(this, "Failed to get image path", Toast.LENGTH_SHORT).show();
-            return;
-        }
+    private void loadUserData() {
+        String userId = auth.getCurrentUser().getUid();
+        DocumentReference userRef = db.collection("Users").document(userId);
+        userRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                editFirstName.setText(documentSnapshot.getString("first_name"));
+                editLastName.setText(documentSnapshot.getString("last_name"));
+                editPhoneNumber.setText(documentSnapshot.getString("phone"));
+                editemail.setText(documentSnapshot.getString("Email"));
+                editAdditionalPhone.setText(documentSnapshot.getString("additional_phone"));
+                editMedicalCondition.setText(documentSnapshot.getString("Medical_Condition"));
+                selectedBirthDate = documentSnapshot.getString("birthday");
+                if (selectedBirthDate != null) btnSelectBirthDate.setText(selectedBirthDate);
+                setSpinnerSelection(bloodType, documentSnapshot.getString("blood_type"));
+                setSpinnerSelection(gender, documentSnapshot.getString("gender"));
+                String imageUrl = documentSnapshot.getString("profile_image");
+                if (!TextUtils.isEmpty(imageUrl)) Picasso.get().load(imageUrl).into(profilePic);
+                Double lat = documentSnapshot.getDouble("latitude");
+                Double lon = documentSnapshot.getDouble("longitude");
+                if (lat != null && lon != null) updateLocation(new GeoPoint(lat, lon));
+            }
+        });
+    }
 
-        File file = new File(imagePath);
+    private void saveUserData() {
+        String userId = auth.getCurrentUser().getUid();
+        DocumentReference userRef = db.collection("Users").document(userId);
+
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("first_name", editFirstName.getText().toString());
+        userData.put("last_name", editLastName.getText().toString());
+        userData.put("phone", editPhoneNumber.getText().toString());
+        userData.put("Email", editemail.getText().toString());
+        userData.put("additional_phone", editAdditionalPhone.getText().toString());
+        userData.put("Medical_Condition", editMedicalCondition.getText().toString());
+        userData.put("birthday", selectedBirthDate);
+        userData.put("blood_type", bloodType.getSelectedItem().toString());
+        userData.put("gender", gender.getSelectedItem().toString());
+
+        if (imageUri != null) {
+            uploadImageToImgbb(imageUri, url -> {
+                userData.put("profile_image", url);
+                userRef.update(userData).addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show();
+                });
+            });
+        } else {
+            userRef.update(userData).addOnSuccessListener(aVoid -> {
+                Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
+
+    private void uploadImageToImgbb(Uri imageUri, OnImageUploadListener listener) {
+        String filePath = getPathFromUri(imageUri);
+        if (filePath == null) return;
+        File file = new File(filePath);
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("key", "6ae56faaa68b4fbc1c460819a90bf4f6") // استخدم المفتاح مباشرة
+                .addFormDataPart("key", IMGBB_API_KEY)
                 .addFormDataPart("image", file.getName(), RequestBody.create(MediaType.parse("image/*"), file))
                 .build();
-
         Request request = new Request.Builder().url("https://api.imgbb.com/1/upload").post(requestBody).build();
-
         client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(() -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(editProfileActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-                });
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
             }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    runOnUiThread(() -> {
-                        progressDialog.dismiss();
-                        Toast.makeText(editProfileActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
-                    });
-                    return;
-                }
-
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseData = response.body().string();
                 try {
-                    // تحليل الاستجابة كـ JSON
-                    String responseBody = response.body().string();
-                    JSONObject jsonResponse = new JSONObject(responseBody);
-                    String imageUrl = jsonResponse.getJSONObject("data").getString("url");
-
-                    // تحديث بيانات المستخدم
-                    userUpdates.put("profile_image", imageUrl);
-                    runOnUiThread(() -> updateFirestore(userRef, userUpdates));
-
+                    JSONObject json = new JSONObject(responseData);
+                    String imageUrl = json.getJSONObject("data").getString("url");
+                    runOnUiThread(() -> listener.onImageUploaded(imageUrl));
                 } catch (Exception e) {
-                    runOnUiThread(() -> {
-                        progressDialog.dismiss();
-                        Toast.makeText(editProfileActivity.this, "Error parsing response", Toast.LENGTH_SHORT).show();
-                    });
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    private void updateFirestore(DocumentReference userRef, Map<String, Object> userUpdates) {
-        userRef.update(userUpdates)
-                .addOnSuccessListener(aVoid -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(editProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(editProfileActivity.this, "Failed to update profile", Toast.LENGTH_SHORT).show();
-                });
-    }
-
-    private String getRealPathFromURI(Uri uri) {
+    private String getPathFromUri(Uri uri) {
         Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        if (cursor == null) return uri.getPath();
+        if (cursor == null) return null;
         cursor.moveToFirst();
         int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        String realPath = cursor.getString(idx);
+        String path = cursor.getString(idx);
         cursor.close();
-        return realPath;
+        return path;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
+    interface OnImageUploadListener {
+        void onImageUploaded(String url);
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
 }

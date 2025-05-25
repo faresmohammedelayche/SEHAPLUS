@@ -39,33 +39,22 @@
         app:layout_constraintTop_toBottomOf="@id/button_back" />
 
     <!-- مربع البحث -->
-    <EditText
-        android:id="@+id/search_nursing"
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/search_background"
-        android:hint="Search your nurse or ..."
-        android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/consultation" />
 
     <!-- الأزرار والنصوص الخاصة بالخدمات الطبية -->
 
     <!-- أخصائي تغذية -->
+
     <ImageView
         android:id="@+id/Nutritionist"
         android:layout_width="98dp"
         android:layout_height="122dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rounded_corner"
         android:contentDescription="Nutritionist"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2"
         app:srcCompat="@drawable/nutritionist" />
 
     <TextView
@@ -78,16 +67,17 @@
         app:layout_constraintTop_toBottomOf="@id/Nutritionist" />
 
     <!-- العلاج الطبيعي -->
+
     <ImageView
         android:id="@+id/physiotherapy"
         android:layout_width="98dp"
         android:layout_height="122dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginTop="32dp"
         android:contentDescription="Physiotherapist"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2"
         app:srcCompat="@drawable/physiotherapy" />
 
     <TextView
@@ -100,21 +90,23 @@
         app:layout_constraintTop_toBottomOf="@id/physiotherapy" />
 
     <!-- الطب النفسي -->
+
+    <!-- التمريض -->
+
     <ImageView
         android:id="@+id/psychiatry"
         android:layout_width="98dp"
         android:layout_height="122dp"
         android:layout_marginStart="143dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="44dp"
         android:contentDescription="Psychiatry"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@id/physiotherapy"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/Nutritionist"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2"
         app:srcCompat="@drawable/psychiatry" />
-
-    <!-- التمريض -->
 
     <TextView
         android:id="@+id/textView11"
@@ -131,11 +123,11 @@
         android:layout_width="98dp"
         android:layout_height="122dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="396dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="paediatrician"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
         app:srcCompat="@drawable/paediatrician" />
 
     <TextView
@@ -154,15 +146,16 @@
         android:id="@+id/psychology"
         android:layout_width="98dp"
         android:layout_height="122dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="Psychology"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:srcCompat="@drawable/psychology" />
 
     <TextView
+        android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -178,14 +171,15 @@
         android:layout_width="98dp"
         android:layout_height="122dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="Elderly Care"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:srcCompat="@drawable/elderycare" />
 
     <TextView
+        android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -207,12 +201,13 @@
         android:id="@+id/Nursing"
         android:layout_width="98dp"
         android:layout_height="122dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="Nursing"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@+id/psychology"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toEndOf="@+id/ElderlyCare"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
         app:srcCompat="@drawable/nursing" />
 
     <TextView
@@ -231,12 +226,12 @@
         android:id="@+id/Midwife"
         android:layout_width="98dp"
         android:layout_height="122dp"
-        android:layout_marginTop="396dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:contentDescription="Midwife"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
         app:srcCompat="@drawable/midewife" />
 
     <TextView
@@ -254,13 +249,13 @@
         android:id="@+id/homeopathy"
         android:layout_width="98dp"
         android:layout_height="122dp"
-        android:layout_marginTop="396dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="Elderly Care"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@+id/Midwife"
-        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toEndOf="@+id/paediatrician"
-        app:layout_constraintTop_toBottomOf="@id/search_nursing"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
         app:srcCompat="@drawable/homeopathy" />
 
     <TextView
@@ -271,5 +266,16 @@
         android:text="Homeopathy"
         app:layout_constraintStart_toStartOf="@id/homeopathy"
         app:layout_constraintTop_toBottomOf="@id/homeopathy" />
+
+    <SearchView
+        android:id="@+id/searchView2"
+        android:layout_width="376dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/search_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/consultation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

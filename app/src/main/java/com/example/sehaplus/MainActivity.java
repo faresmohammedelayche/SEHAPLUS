@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private TextView welcomeText;
-    private ImageView profileImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,90 +40,78 @@ public class MainActivity extends AppCompatActivity {
 
     private void fetchUserName() {
         String userId = auth.getCurrentUser().getUid();
-        DocumentReference userRef = db.collection("Users").document(userId);
+        db.collection("Users").document(userId)
+                .addSnapshotListener((documentSnapshot, error) -> {
+                    if (error != null) {
+                        Log.e("FirestoreError", "Error", error);
+                        return;
+                    }
 
-        userRef.addSnapshotListener((documentSnapshot, error) -> {
-            if (error != null) {
-                Log.e("FirestoreError", "فشل في جلب البيانات", error);
-                return;
-            }
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        String firstName = documentSnapshot.getString("first_name");
+                        String lastName = documentSnapshot.getString("last_name");
 
-            if (documentSnapshot != null && documentSnapshot.exists()) {
-                String firstName = documentSnapshot.getString("first_name");
-                String lastName = documentSnapshot.getString("last_name");
-
-                if (firstName != null && lastName != null) {
-                    String fullName = firstName + " " + lastName;
-                    welcomeText.setText(fullName);
-                    welcomeText.setTextColor(Color.parseColor("#50D7C3"));
-                }
-            }
-        });
+                        if (firstName != null && lastName != null) {
+                            welcomeText.setText(firstName + " " + lastName);
+                            welcomeText.setTextColor(Color.parseColor("#50D7C3"));
+                        }
+                    }
+                });
     }
 
     private void goToNurse() {
-        Intent intent = new Intent(MainActivity.this, nursingActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, nursingActivity.class));
     }
 
     private void goToStore() {
-        Intent intent = new Intent(MainActivity.this, storeActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, storeActivity.class));
     }
 
     private void showSideSheetDialog() {
         SideSheetDialog sideSheetDialog = new SideSheetDialog(this);
         sideSheetDialog.setContentView(R.layout.side_sheet_layout);
-        sideSheetDialog.setCanceledOnTouchOutside(true);
         sideSheetDialog.setSheetEdge(Gravity.START);
 
-        // جلب مراجع العناصر داخل SideSheet
         TextView userNameTextView = sideSheetDialog.findViewById(R.id.userName);
         TextView userPhoneTextView = sideSheetDialog.findViewById(R.id.phone);
         ImageView editIcon = sideSheetDialog.findViewById(R.id.editIcon);
-        ImageView profileImageView = sideSheetDialog.findViewById(R.id.profileImage);
+        ImageView profileImage = sideSheetDialog.findViewById(R.id.profileImage);
+        Button switchMode = sideSheetDialog.findViewById(R.id.btnSwitchMode);
 
-        // التأكد من أن العناصر غير فارغة قبل تحديثها
-        if (userNameTextView != null && userPhoneTextView != null && profileImageView != null) {
-            fetchUserData(userNameTextView, userPhoneTextView, profileImageView);
+        if (userNameTextView != null && userPhoneTextView != null && profileImage != null) {
+            fetchUserData(userNameTextView, userPhoneTextView, profileImage);
         }
+
         if (editIcon != null) {
-            editIcon.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, editProfileActivity.class);
-                startActivity(intent);
-            });
+            editIcon.setOnClickListener(v -> startActivity(new Intent(this, editProfileActivity.class)));
         }
         sideSheetDialog.show();
     }
 
-    private void fetchUserData(TextView userNameTextView, TextView userPhoneTextView, ImageView profileImageView) {
+    private void fetchUserData(TextView userName, TextView phone, ImageView image) {
         String userId = auth.getCurrentUser().getUid();
-        DocumentReference userRef = db.collection("Users").document(userId);
+        db.collection("Users").document(userId)
+                .addSnapshotListener((snapshot, error) -> {
+                    if (error != null) {
+                        Log.e("FirestoreError", "Error", error);
+                        return;
+                    }
 
-        userRef.addSnapshotListener((documentSnapshot, error) -> {
-            if (error != null) {
-                Log.e("FirestoreError", "فشل في جلب البيانات", error);
-                return;
-            }
+                    if (snapshot != null && snapshot.exists()) {
+                        String firstName = snapshot.getString("first_name");
+                        String lastName = snapshot.getString("last_name");
+                        String phoneNumber = snapshot.getString("phone");
+                        String imageUrl = snapshot.getString("profile_image");
 
-            if (documentSnapshot != null && documentSnapshot.exists()) {
-                String firstName = documentSnapshot.getString("first_name");
-                String lastName = documentSnapshot.getString("last_name");
-                String phoneNumber = documentSnapshot.getString("phone");
-                String profileImageUrl = documentSnapshot.getString("profile_image");
-
-                if (firstName != null && lastName != null) {
-                    userNameTextView.setText(firstName + " " + lastName);
-                }
-                if (phoneNumber != null) {
-                    userPhoneTextView.setText(phoneNumber);
-                }
-                if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-                    Picasso.get().load(profileImageUrl).placeholder(R.drawable.user).into(profileImageView);
-                } else {
-                    profileImageView.setImageResource(R.drawable.user);
-                }
-            }
-        });
+                        if (firstName != null && lastName != null)
+                            userName.setText(firstName + " " + lastName);
+                        if (phoneNumber != null)
+                            phone.setText(phoneNumber);
+                        if (imageUrl != null && !imageUrl.isEmpty())
+                            Picasso.get().load(imageUrl).placeholder(R.drawable.user).into(image);
+                        else
+                            image.setImageResource(R.drawable.user);
+                    }
+                });
     }
 }

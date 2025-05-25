@@ -21,31 +21,7 @@
         android:theme="@style/Theme.SEHAPLUS"
         tools:replace="android:fullBackupContent"
         tools:targetApi="31" >
-        <activity
-            android:name=".ProduitActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProduitActivite"
-            android:exported="false" />
-        <activity
-            android:name=".editProfileNurseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RequestnurseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ManagerActivity"
-            android:exported="false"
-            android:label="@string/title_activity_manager" />
-        <activity
-            android:name=".loginEmployeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EmployeHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HelloEmployeActivity"
-            android:exported="false" />
+        
         <activity
             android:name=".NurseProfileActivity"
             android:exported="false" />

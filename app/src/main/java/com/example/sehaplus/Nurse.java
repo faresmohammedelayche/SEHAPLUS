@@ -1,18 +1,39 @@
 package com.example.sehaplus;
 
 public class Nurse {
-    String firstName, lastName ,speciality,profileImage;
-    Long rating,price;
 
-    public Nurse(){}
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String speciality;
+    private String profileImage;
+    private Long rating;
+    private Long price;
 
-    public Nurse(String firstName, String lastName, String speciality, String profileImage, Long rating, Long price) {
+
+    public Nurse() {
+
+    }
+
+
+
+    public Nurse(String id ,String firstName, String lastName, String speciality, String profileImage, Long rating, Long price) {
+        this.id=id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.speciality = speciality;
         this.profileImage = profileImage;
         this.rating = rating;
         this.price = price;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {
